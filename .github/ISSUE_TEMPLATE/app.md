@@ -8,23 +8,25 @@ assignees: ''
 
 ---
 
-| Beskrivelse av tjenesten | _Legg inn en beskrivelse av tjenesten._ |
+#### Er tjenesten en ny eller eksisterende tjeneste?
+- [ ] Ny tjeneste
+- [ ] Eksisterende tjeneste
+ 
+ Hvis eksisterende, fyll ut tabellen under:
+ 
+ | Beskrivelse av tjenesten | _Legg inn kort beskrivelse_ |
 | ------------- | ------------- |
 | **Tjenestekode** | _Legg inn tjenestekode (ServiceCode)_  |
 | **Tjenesteutgavekode**  |  _Legg inn tjenesteutgavekode (ServiceEditionCode)_ |
 | **Tjenestetype**  | Innsending/Innsyn/Melding/Samhandling/Formidling/Annen  |
 | **Volum**  | Arkiveringer/Transaksjoner  |
-
-
-#### Er tjenesten en ny eller eksisterende tjeneste?
-- [ ] Ny tjeneste
-- [ ] Eksisterende tjeneste
+| **Integrasjon**  | _Web Service / SFTP / DownloadQueue_ |
  
 #### Skal tjenesten migreres til Altinn 3.0?
 - [ ] Skal migreres 
 - [ ] Skal _IKKE_ migreres
 
-## Generell informasjon om tjenesten
+## Egenskaper
 
 #### Hvordan benyttes Tjenesten?
 - [ ] Kun portal-innsending
@@ -51,16 +53,18 @@ Hvis Ja, beskriv rollene og rollekravene nærmere.
 _Eksempelvis, innsendingsfrist en eller flere ganger i året._
 
 ### Integrasjon
-Navn på grensesnitt (Altinn 2):
 
-#### Hvilken type grensesnitt bruker tjenesten?
-- [ ] SFTP
-- [ ] WebService
-- [ ] DownloadQueue
+| Navn på Grensesnitt| _fyll inn_ |
+| ------------- | ------------- |
+|Type Grensesnitt| _Web Service / SFTP / DownloadQueue_  |
+
 
 #### Bruker Tjenesten "Splitt av Data"?
 - [ ] Ja
 - [ ] Nei
+
+### Bruk av Standard Altinn-funksjonalitet
+_TBD_
 
 ### Lenker og filer
 
