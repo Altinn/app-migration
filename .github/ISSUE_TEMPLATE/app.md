@@ -8,6 +8,8 @@ assignees: ''
 
 ---
 
+## Innledning
+
 #### Er tjenesten en ny eller eksisterende tjeneste?
 - [ ] Ny tjeneste
 - [ ] Eksisterende tjeneste
@@ -26,7 +28,7 @@ assignees: ''
 - [ ] Skal migreres 
 - [ ] Skal _IKKE_ migreres
 
-## Egenskaper
+## Generelle egenskaper
 
 #### Hvordan benyttes Tjenesten?
 - [ ] Kun portal-innsending
@@ -58,15 +60,13 @@ _Eksempelvis, innsendingsfrist en eller flere ganger i året._
 | ------------- | ------------- |
 |Type Grensesnitt| _Web Service / SFTP / DownloadQueue_  |
 
+## Skjermbilder
+> Legg inn (relevante) skjermbilder av tjenesten her.
 
-#### Bruker Tjenesten "Splitt av Data"?
-- [ ] Ja
-- [ ] Nei
+## Bruk av Standard Altinn-funksjonalitet
+> Fyll ut
 
-### Bruk av Standard Altinn-funksjonalitet
-_TBD_
-
-### Lenker og filer
+## Lenker og filer
 
 - Lenke til tjeneste-/skjemakatalogen: https://altinn.no/skjemaoversikt/ ....
 
@@ -74,12 +74,9 @@ _TBD_
 - Lenke til tjenesten i TUL: https://tul.altinn.no/ ....
 - Lenke til tjenesten i Altinn 2.0 (test): https://tt02.altinn.no/ ....
 - Lenke til tjenesten i Altinn 2.0 (produksjon): https://altinn.no/ .....
-- XSD: _Last opp XSD her_
+- XSD: _Last opp XSD her (i .zip-format)_
 
 #### Altinn 3
 - Lenke til (ny/migrert) tjeneste i Altinn Studio:
 - Lenke til (ny/migrert) tjeneste i sluttbrukerløsningen (test):
 - Lenke til (ny/migrert) tjeneste i sluttbrukerløsningen (prod):
-
-## Skjermbilder
-> Legg inn (relevante) skjermbilder av tjenesten her.
