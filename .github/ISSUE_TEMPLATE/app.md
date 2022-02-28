@@ -9,4 +9,13 @@ assignees: ''
 
 ## App beskrivelse
 
-TODO
+body:
+  - type: dropdown
+    id: eksisterende
+    attributes:
+      label: Eksisterende eller ny tjeneste?
+      multiple: true
+      options:
+        - Ny
+        - Eksisterende
+
