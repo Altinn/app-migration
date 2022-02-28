@@ -8,31 +8,23 @@ assignees: ''
 
 ---
 
-## Beskrivelse
+| Beskrivelse av tjenesten | _Legg inn en beskrivelse av tjenesten._ |
+| ------------- | ------------- |
+| **Tjenestekode** | _Legg inn tjenestekode (ServiceCode)_  |
+| **Tjenesteutgavekode**  |  _Legg inn tjenesteutgavekode (ServiceEditionCode)_ |
+| **Tjenestetype**  | Innsending/Innsyn/Melding/Samhandling/Formidling/Annen  |
+| **Volum**  | Arkiveringer/Transaksjoner  |
 
-> Legg inn en overordnet beskrivelse av tjenesten her.
 
 #### Er tjenesten en ny eller eksisterende tjeneste?
 - [ ] Ny tjeneste
 - [ ] Eksisterende tjeneste
-
-#### Tjenestetype?
-- [ ] Innsending
-- [ ] Innsyn
-- [ ] Melding
-- [ ] Samhandlingstjeneste
-- [ ] Formidlingstjeneste
-- [ ] Annen? 
-
+ 
 #### Skal tjenesten migreres til Altinn 3.0?
 - [ ] Skal migreres 
 - [ ] Skal _IKKE_ migreres
 
 ## Generell informasjon om tjenesten
-
-Tjenestekode (ServiceCode):
-
-Tjenesteutgavekode (ServiceEditionCode): 
 
 #### Hvordan benyttes Tjenesten?
 - [ ] Kun portal-innsending
@@ -51,8 +43,6 @@ Hvis Ja, beskriv rollene og rollekravene nærmere.
 - [ ] Nivå 2
 - [ ] Nivå 3
 - [ ] Nivå 4
-
-#### Hvilket volum (antall innsendinger/arkiverte/transaksjoner) har tjenesten?**
 
 #### Har tjenesten frister eller andre egenskaper?
 - [ ] Ja
@@ -73,6 +63,8 @@ Navn på grensesnitt (Altinn 2):
 - [ ] Nei
 
 ### Lenker og filer
+
+- Lenke til tjeneste-/skjemakatalogen: https://altinn.no/skjemaoversikt/ ....
 
 #### Altinn 2
 - Lenke til tjenesten i TUL: https://tul.altinn.no/ ....
