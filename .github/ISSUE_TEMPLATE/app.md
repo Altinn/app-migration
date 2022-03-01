@@ -45,7 +45,7 @@ assignees: ''
 
 Hvis Ja, beskriv rollene og rollekravene nærmere.
 
-#### Hvilket sikkerhetsnivå krever tjenesten?**
+#### Hvilket sikkerhetsnivå krever tjenesten?
 - [ ] Nivå 0
 - [ ] Nivå 1
 - [ ] Nivå 2
