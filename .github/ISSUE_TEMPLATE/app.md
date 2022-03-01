@@ -27,6 +27,7 @@ assignees: ''
 #### Skal tjenesten migreres til Altinn 3.0?
 - [ ] Skal migreres 
 - [ ] Skal _IKKE_ migreres
+- [ ] Vet ikke
 
 ## Generelle egenskaper
 
