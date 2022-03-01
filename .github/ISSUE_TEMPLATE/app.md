@@ -35,6 +35,10 @@ assignees: ''
 - [ ] Kun sluttbrukersystem-innsending
 - [ ] Både portal- og sluttbrukersystem-innsending
 
+#### Har tjenesten underskjema / skjemasett?
+- [ ] Ja
+- [ ] Nei
+
 #### Er det rollekrav på tjenesten?
 - [ ] Ja
 - [ ] Nei
