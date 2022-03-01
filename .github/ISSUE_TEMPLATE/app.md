@@ -73,15 +73,23 @@ _Eksempelvis, innsendingsfrist en eller flere ganger i året._
 
 ## Lenker og filer
 
-- Lenke til tjeneste-/skjemakatalogen: https://altinn.no/skjemaoversikt/ ....
+- Lenke til tjeneste-/skjemakatalogen: 
 
 #### Altinn 2
-- Lenke til tjenesten i TUL: https://tul.altinn.no/ ....
-- Lenke til tjenesten i Altinn 2.0 (test): https://tt02.altinn.no/ ....
-- Lenke til tjenesten i Altinn 2.0 (produksjon): https://altinn.no/ .....
+
+| Område  | Lenke |
+| ------------- | ------------- |
+| Skjemakatalogen  | https://altinn.no/skjemaoversikt/ ....  |
+| TUL  | https://tul.altinn.no/ ....  |
+| Altinn 2.0 (test)  | https://tt02.altinn.no/ .... |
+| Altinn 2.0 (prod)  | https://altinn.no/ .....  |
+
 - XSD: _Last opp XSD her (i .zip-format)_
 
 #### Altinn 3
-- Lenke til (ny/migrert) tjeneste i Altinn Studio:
-- Lenke til (ny/migrert) tjeneste i sluttbrukerløsningen (test):
-- Lenke til (ny/migrert) tjeneste i sluttbrukerløsningen (prod):
+
+| Område  | Lenke |
+| ------------- | ------------- |
+| Altinn Studio  | https://altinn.no/skjemaoversikt/ ....  |
+| Altinn 3.0 (test)  |  ....  |
+| Altinn 3.0 (prod)  | .... |
