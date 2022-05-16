@@ -1,6 +1,6 @@
 ---
 name: App
-about: Beskrivelse av en tjeneste som skal migreres
+about: Beskrivelse av en tjeneste som skal migreres fra Altinn 2 til Altinn 3
 title: "[App navn]"
 labels: kind/app
 assignees: ''
@@ -10,11 +10,6 @@ assignees: ''
 
 ## Innledning
 
-#### Er tjenesten en ny eller eksisterende tjeneste?
-- [ ] Ny tjeneste
-- [ ] Eksisterende tjeneste
- 
- Hvis eksisterende, fyll ut tabellen under:
  
  | Beskrivelse av tjenesten | _Legg inn kort beskrivelse_ |
 | ------------- | ------------- |
@@ -24,10 +19,6 @@ assignees: ''
 | **Volum**  | Arkiveringer/Transaksjoner  |
 | **Integrasjon**  | _Web Service / SFTP / DownloadQueue_ |
  
-#### Skal tjenesten migreres til Altinn 3.0?
-- [ ] Skal migreres 
-- [ ] Skal _IKKE_ migreres
-- [ ] Vet ikke
 
 ## Generelle egenskaper
 
@@ -40,18 +31,6 @@ assignees: ''
 - [ ] Ja
 - [ ] Nei
 
-#### Er det rollekrav på tjenesten?
-- [ ] Ja
-- [ ] Nei
-
-Hvis Ja, beskriv rollene og rollekravene nærmere.
-
-#### Hvilket sikkerhetsnivå krever tjenesten?
-- [ ] Nivå 0
-- [ ] Nivå 1
-- [ ] Nivå 2
-- [ ] Nivå 3
-- [ ] Nivå 4
 
 #### Har tjenesten frister eller andre egenskaper?
 - [ ] Ja
@@ -68,12 +47,10 @@ _Eksempelvis, innsendingsfrist en eller flere ganger i året._
 ## Skjermbilder
 > Legg inn (relevante) skjermbilder av tjenesten her.
 
-## Bruk av Standard Altinn-funksjonalitet
+## Behov for funksjonalitet
 > Fyll ut
 
 ## Lenker og filer
-
-- Lenke til tjeneste-/skjemakatalogen: 
 
 #### Altinn 2
 
