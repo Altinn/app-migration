@@ -1,5 +1,5 @@
 ---
-name: App
+name: App som skal migreres
 about: Beskrivelse av en tjeneste som skal migreres fra Altinn 2 til Altinn 3
 title: "[App navn]"
 labels: kind/app
