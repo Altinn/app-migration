@@ -11,7 +11,7 @@ assignees: ''
 
 | Beskrivelse av tjenesten      | _Legg inn kort beskrivelse_ |
 | ----------------------------- | --------------------------- |
-| **Volum**                     | Arkiveringer/Transaksjoner  |
+| **Volum**                     | _Ca antall transaksjoner pr. år_  |
 | **Planlagt produksjonssatt**  | _dd.mm.åå_                  |
 
 
