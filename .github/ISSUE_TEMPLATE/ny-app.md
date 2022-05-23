@@ -4,17 +4,15 @@ about: Beskrivelse av en ny tjeneste som skal utvikles
 title: "[App navn]"
 labels: kind/app
 assignees: ''
-
-
 ---
+
 
 ## Innledning
 
-
- | Beskrivelse av tjenesten | _Legg inn kort beskrivelse_ |
-| ------------- | ------------- |
-| **Volum**  | Arkiveringer/Transaksjoner  |
-| **Planlagt produksjonssatt**  | _dd.mm.åå_ |
+| Beskrivelse av tjenesten      | _Legg inn kort beskrivelse_ |
+| ----------------------------- | --------------------------- |
+| **Volum**                     | Arkiveringer/Transaksjoner  |
+| **Planlagt produksjonssatt**  | _dd.mm.åå_                  |
 
 
 ## Generelle egenskaper
@@ -39,9 +37,7 @@ _Eksempelvis, innsendingsfrist en eller flere ganger i året, hendelsesbasert._
 
 ## Lenker og filer
 
-
-| Område  | Lenke |
-| ------------- | ------------- |
-| Altinn Studio  | ....  |
-| Altinn 3.0 (test)  |  ....  |
-
+| Område            | Lenke     |
+| ----------------- | --------- |
+| Altinn Studio     |           |
+| Altinn 3.0 (test) |           |
