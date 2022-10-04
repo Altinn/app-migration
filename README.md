@@ -1,4 +1,4 @@
-# App backlog
+# App migration backlog
 Backlog for migrering av tjenester fra Altinn 2 til Altinn 3.
 
 Her finner man:
