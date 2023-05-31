@@ -13,8 +13,8 @@ assignees: ''
  
  | Beskrivelse av tjenesten | _Legg inn kort beskrivelse_ |
 | ------------- | ------------- |
-| **Tjenestekode** | _Legg inn tjenestekode (ServiceCode)_  |
-| **Tjenesteutgavekode**  |  _Legg inn tjenesteutgavekode (ServiceEditionCode)_ |
+| **Tjenestekode** |   |
+| **Tjenesteutgavekode**  |  |
 | **Tjenestetype**  | Innsending/Innsyn/Melding/Samhandling/Formidling/Annen  |
 | **Volum**  | Arkiveringer/Transaksjoner  |
 | **Integrasjon**  | _Web Service / SFTP / DownloadQueue_ |
@@ -56,10 +56,9 @@ _Eksempelvis, innsendingsfrist en eller flere ganger i året._
 
 | Område  | Lenke |
 | ------------- | ------------- |
-| Skjemakatalogen  | https://altinn.no/skjemaoversikt/ ....  |
-| TUL  | https://tul.altinn.no/ ....  |
-| Altinn 2.0 (test)  | https://tt02.altinn.no/ .... |
-| Altinn 2.0 (prod)  | https://altinn.no/ .....  |
+| Skjemakatalogen  |  |
+| TUL  |   |
+| Altinn 2.0 (prod)  |  |
 
 - XSD: _Last opp XSD her (i .zip-format)_
 
@@ -67,6 +66,6 @@ _Eksempelvis, innsendingsfrist en eller flere ganger i året._
 
 | Område  | Lenke |
 | ------------- | ------------- |
-| Altinn Studio  | https://altinn.no/skjemaoversikt/ ....  |
+| Altinn Studio  |  ....  |
 | Altinn 3.0 (test)  |  ....  |
 | Altinn 3.0 (prod)  | .... |
