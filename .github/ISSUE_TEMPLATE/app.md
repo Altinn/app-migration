@@ -67,7 +67,7 @@ Har tjenesten underskjema/skjemasett (J/N)
 - [ ] Sikkerhetsnivå
 - [ ] Aktørtype (organisasjon/person/konkursbo...)
 - [ ] Rollekrav
-- [ ] Godkjent i test av tjenesteeier 
+- [ ] Godkjent i test/TT02 av tjenesteeier 
 - [ ] Review
 - [ ] Produksjon
 - [ ] Oppdatere tekst/lenke på Infoportal (TT)
