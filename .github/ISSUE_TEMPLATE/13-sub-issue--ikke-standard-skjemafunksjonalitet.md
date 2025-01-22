@@ -4,7 +4,7 @@ about: Sub-issue mal for ikke-standard skjemafunksjonalitet.
 title: Legg til [funksjonalitet]
 labels: ''
 assignees: ''
-type: 'Task'
+
 ---
 
 ## Oppgaver

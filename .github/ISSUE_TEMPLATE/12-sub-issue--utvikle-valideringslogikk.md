@@ -4,7 +4,7 @@ about: Sub-issue mal for utvikling av valideringslogikk.
 title: Utvikle valideringslogikk
 labels: ''
 assignees: ''
-type: 'Task'
+
 ---
 
 ## Valideringsfiler

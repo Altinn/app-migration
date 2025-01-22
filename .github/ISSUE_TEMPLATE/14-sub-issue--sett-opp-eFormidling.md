@@ -4,7 +4,7 @@ about: Sub-issue mal for oppsett av eFormidling.
 title: Sett opp eFormidling
 labels: ''
 assignees: ''
-type: 'Task'
+
 ---
 
 ## Oppgaver
