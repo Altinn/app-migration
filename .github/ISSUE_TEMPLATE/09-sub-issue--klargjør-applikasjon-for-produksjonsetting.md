@@ -4,7 +4,7 @@ about: Sub-issue mal for klargjøring av applikasjonen for produksjonsetting.
 title: Klargjør applikasjon for produksjonsetting
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Oppgaver

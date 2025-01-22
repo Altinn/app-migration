@@ -4,7 +4,7 @@ about: Sub-issue mal for tekstressurs filer.
 title: Lag tekstressurs filer
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Språk

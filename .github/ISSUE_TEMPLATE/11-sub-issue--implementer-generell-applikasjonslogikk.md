@@ -4,7 +4,7 @@ about: Sub-issue mal for implementasjon av generell applikasjonslogikk.
 title: Implementer generell applikasjonslogikk
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Logikkfiler

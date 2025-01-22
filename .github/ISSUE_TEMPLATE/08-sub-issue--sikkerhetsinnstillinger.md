@@ -4,7 +4,7 @@ about: Sub-issue mal for oppsett av sikkerhetsinnstillinger.
 title: Sikkerhetsinnstillinger
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Innstillinger

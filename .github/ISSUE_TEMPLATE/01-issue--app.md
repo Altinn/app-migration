@@ -1,10 +1,10 @@
 ---
 name: 'Issue: App som skal migreres'
 about: Beskrivelse av en tjeneste som skal migreres fra Altinn 2 til Altinn 3
-title: "[App navn]"
+title: '[App navn]'
 labels: ''
 assignees: ''
-
+type: 'Epic'
 ---
 
 ## Innledning

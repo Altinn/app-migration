@@ -4,7 +4,7 @@ about: Sub-issue mal for options.
 title: Legg til options
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Optionsfiler

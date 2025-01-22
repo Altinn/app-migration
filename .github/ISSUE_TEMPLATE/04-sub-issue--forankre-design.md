@@ -4,7 +4,7 @@ about: Sub-issue mal for forankring av design.
 title: Forankre design
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Oppgaver

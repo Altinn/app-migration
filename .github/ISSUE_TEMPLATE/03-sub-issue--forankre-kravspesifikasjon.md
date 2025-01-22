@@ -4,7 +4,7 @@ about: Sub-issue mal for forankring av kravspesifikasjon.
 title: Forankre kravspesifikasjon
 labels: ''
 assignees: ''
-
+type: 'Task'
 ---
 
 ## Oppgaver

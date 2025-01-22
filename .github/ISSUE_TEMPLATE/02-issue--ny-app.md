@@ -1,10 +1,10 @@
 ---
 name: 'Issue: Ny app som skal utvikles'
 about: Beskrivelse av en ny tjeneste som skal utvikles
-title: "[App navn]"
+title: '[App navn]'
 labels: ''
 assignees: ''
-
+type: 'Epic'
 ---
 
 ## Innledning
