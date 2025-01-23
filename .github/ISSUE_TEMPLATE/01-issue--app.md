@@ -1,40 +1,34 @@
 ---
-name: 'Issue: App som skal migreres'
-about: Beskrivelse av en tjeneste som skal migreres fra Altinn 2 til Altinn 3
+name: 'Issue: App som skal utvikles'
+about: Beskrivelse av en tjeneste som skal utvikles.
 title: '[App navn]'
-labels: ''
+labels: kind/app
 assignees: ''
 type: 'Epic'
 ---
 
-## Innledning
+# Om applikasjonen
 
-| Beskrivelse av tjenesten | Legg inn kort beskrivelse |
-| ------------------------ | ------------------------- |
-| **Tjenestekode**         |                           |
-| **Tjenesteutgavekode**   |                           |
+<!-- Her kan du legge inn en beskrivelse av applikasjonen. -->
 
-## Generelle egenskaper
+## Egenskaper
 
-#### Hvordan benyttes Tjenesten?
+<!--  -->
 
-Kun portal-innsending (J/N):  
-Kun sluttbrukersystem-innsending (J/N):  
-Både portal- og sluttbrukersystem-innsending (J/N):
+| Egenskap                            | Verdi                              |
+| ----------------------------------- | ---------------------------------- |
+| Migrering eller ny tjeneste?        | _TBD (Migrering/Ny)_               |
+| Figma skisse                        | _TBD (J/N – legg til Figma lenke)_ |
+| Språk                               | _TBD_                              |
+| API                                 | _TBD_                              |
+| eFormidling                         | _TBD (J/N)_                        |
+| Frontend skal låses før produksjon? | _TBD (J/N)_                        |
 
-Har tjenesten underskjema/skjemasett (J/N)
-
-## Skjermbilder
-
-> Legg inn (relevante) skjermbilder av tjenesten her. Tips: legg inn skjermbilder fra TUL som viser tilgangsinfo (sikkerhetsnivå, rollekrav, avgiverkrav osv)
-
-## Behov for funksjonalitet
-
-> Fyll ut
-
-## Lenker og filer
+### Lenker
 
 #### Altinn 2
+
+<!-- Denne tabellen fjernes dersom det er en ny tjeneste. -->
 
 | Område            | Lenke |
 | ----------------- | ----- |
@@ -46,61 +40,59 @@ Har tjenesten underskjema/skjemasett (J/N)
 
 | Område            | Lenke |
 | ----------------- | ----- |
-| Altinn Studio     | ....  |
-| Altinn 3.0 (test) | ....  |
+| Altinn Studio     |       |
+| Altinn 3.0 (test) |       |
 
-## Tasks
+### Sikkerhetsinnstillinger
 
-- [ ] Logo
-- [ ] Språkfiler
-- [ ] Applikasjonsprosess
-- [ ] Sikkerhetsnivå
-- [ ] Aktørtype (organisasjon/person/konkursbo...)
-- [ ] Rollekrav
-- [ ] Godkjent i test/TT02 av tjenesteeier
-- [ ] Review
-- [ ] Produksjon
-- [ ] Oppdatere tekst/lenke på Infoportal (TT)
+| Egenskap                                      | Verdi                                                                                 |
+| --------------------------------------------- | ------------------------------------------------------------------------------------- |
+| PartyTypesAllowed                             | bankruptcyEstate, organisation, person, subUnit (ta vekk de som ikke skal ha tilgang) |
+| Sikkerhetsnivå                                | _TBD_                                                                                 |
+| Automatisk sletting etter innsending          | true/false                                                                            |
+| Skjul i arkivet til brukeren etter innsending | true/false                                                                            |
+| Brukeren kan kopiere eksemplaret              | true/false                                                                            |
+| Vis eksemplarer som er startet på             | true/false                                                                            |
 
-#### Code Review
+### Roller
 
-**Textresources:**
+<!-- Legg til rollene og evt. steg de skal ha rettigheter på. -->
 
-- [ ] Check app logo
-- [ ] Check that it has Alternative text for logo
-- [ ] Check Appowner
-- [ ] Check Camelcase on id
+| Prosess steg       | Rolle kode | Les | Skriv | Bekreft | Betal | Avslå | Signer |
+| ------------------ | ---------- | --- | ----- | ------- | ----- | ----- | ------ |
+| Task_1 - Utfylling |            |     |       |         |       |       |        |
+|                    |            |     |       |         |       |       |        |
+| Task_2 - Signer 1  |            |     |       |         |       |       |        |
+|                    |            |     |       |         |       |       |        |
+| Task_3 - Signer 2  |            |     |       |         |       |       |        |
+|                    |            |     |       |         |       |       |        |
 
-**Layout files:**
+### Prosess steg
 
-- [ ] Camelcase on id
-- [ ] Use Groups that can be reused in summary and pdf
-- [ ] If app has an attachment component it should have the same values such as min and max count as in applicationmeta data file.
-- [ ] Check that it has a file called 01Intro
-- [ ] Check that it has a file called 99Summary
-- [ ] Check that it has a pdfReceipt file
-- [ ] Check Grid and inner grid and make sure it has both xs: and md:
+<!-- Se [mermaid sin dokumentasjon](https://mermaid.js.org/syntax/flowchart.html) for oppsett av prosessen. -->
 
-**Applicationmetadata:**
+```mermaid
+graph LR;
+    StartEvent@{ shape: circle, label: 'Instansiering' }
+    Task_1@{ shape: process, label: 'Utfylling' }
+    EndEvent@{ shape: double-circle, label: 'Innsending' }
 
-- [ ] Logo
-- [ ] Check that displayAppOwnerNameInHeader: false
-- [ ] Logo "size" same as the other applications
+    StartEvent ---> Task_1
+    Task_1 ---> EndEvent
+```
 
-**App.csproj:**
+### Vedlegg
 
-- [ ] Make sure PackageReference version = 7.15.1
+<!-- Her kan du legge ved informasjon om vedleggene i skjemaet. -->
 
-**Data model:**
+| ID  | [allowedContentTypes](https://developer.mozilla.org/en-US/docs/Web/HTTP/MIME_types/Common_types) | maxSize | minCount | maxCount |
+| --- | ------------------------------------------------------------------------------------------------ | ------- | -------- | -------- |
+|     |                                                                                                  |         |          |          |
 
-- [ ] Delete minOccurs on required fields.
-- [ ] Pascal case on name in data model
+## Huskeliste
 
-**Options file:**
-
-- [ ] Make sure all plain text is referred to though text resource id
-
-**Logic files:**
-
-- [ ] Make sure all plain text is referred to though text resource id
-- [ ] Make sure all custom service implementations is added in Program.cs
+- [ ] Legg til følgende kode i `.gitignore`:
+  ```
+  # Do not include secrets.json file
+  secrets.json
+  ```
