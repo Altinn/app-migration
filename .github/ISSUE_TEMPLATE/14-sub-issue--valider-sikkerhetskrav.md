@@ -1,7 +1,7 @@
 ---
 name: 'Sub-issue: Valider sikkerhetskrav'
 about: Sub-issue mal for validering av sikkerhetskrav.
-title: Legg til [funksjonalitet]
+title: Valider sikkerhetskrav
 labels: ''
 assignees: ''
 type: 'Task'
