@@ -18,4 +18,5 @@ type: 'Task'
 
 ### Huskeliste
 
--
+- Test tilgangsstyring
+- Test lenke/info på Infoportal
