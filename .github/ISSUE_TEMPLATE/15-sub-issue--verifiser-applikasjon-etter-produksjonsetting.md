@@ -12,7 +12,7 @@ type: 'Task'
 <!-- Legg til/fjern aktuelle oppgaver. -->
 
 - [ ] Verifisert i PROD av tjenesteeier.
-- [ ] Oppdatere tekst/lenke på Infoportal (PROD).
+- [ ] Verifisert tekst/lenke på Infoportal (PROD).
 
 ### Huskeliste
 
