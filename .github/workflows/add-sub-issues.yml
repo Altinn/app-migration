@@ -1,0 +1,27 @@
+name: Add sub-issues
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  create-sub-issue:
+    if: contains(github.event.issue.labels.*.name, 'kind/app')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Add sub-issues
+        id: add-sub-issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: tina-ahm/add-sub-issue@v1
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
+          issue_number: ${{ github.event.issue.number }}
+          assignee: ${{ github.event.issue.assignee.login }}
+          templates: '[".github/ISSUE_TEMPLATE/02-sub-issue--forankre-kravspesifikasjon.md", ".github/ISSUE_TEMPLATE/03-sub-issue--forankre-design.md", ".github/ISSUE_TEMPLATE/04-sub-issue--lag-skjema-datamodell-er-.md", ".github/ISSUE_TEMPLATE/05-sub-issue--lag-layout-filer.md", ".github/ISSUE_TEMPLATE/06-sub-issue--lag-tekstressurs-filer.md", ".github/ISSUE_TEMPLATE/07-sub-issue--sikkerhetsinnstillinger.md", ".github/ISSUE_TEMPLATE/08-sub-issue--klargjør-applikasjon-for-produksjonsetting.md", ".github/ISSUE_TEMPLATE/14-sub-issue--valider-sikkerhetskrav.md", ".github/ISSUE_TEMPLATE/15-sub-issue--verifiser-applikasjon-etter-produksjonsetting.md", ".github/ISSUE_TEMPLATE/16-sub-issue--sluttrapport.md"]'
