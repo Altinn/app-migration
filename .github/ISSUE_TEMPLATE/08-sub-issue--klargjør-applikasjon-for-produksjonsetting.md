@@ -15,6 +15,7 @@ type: 'Task'
 - [ ] Review
 - [ ] Lås front-end version.
 - [ ] Oppdatere tekst/lenke på Infoportal (TT).
+- [ ] Legg til README ([mal](https://altinn.studio/repos/tina/template#readme) og [eksempel](https://altinn.studio/repos/dihe/samtykke-enkeltvedtak-spesped#readme)).
 
 ### Huskeliste
 
