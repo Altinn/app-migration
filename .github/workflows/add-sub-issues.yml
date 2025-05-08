@@ -19,7 +19,7 @@ jobs:
         id: add-sub-issues
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        uses: tina-ahm/add-sub-issue@v1
+        uses: tina-ahm/add-sub-issue@v1.1
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
           issue_number: ${{ github.event.issue.number }}
