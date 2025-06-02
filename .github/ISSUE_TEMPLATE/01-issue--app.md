@@ -15,14 +15,15 @@ type: 'Epic'
 
 <!--  -->
 
-| Egenskap                            | Verdi                              |
-| ----------------------------------- | ---------------------------------- |
-| Migrering eller ny tjeneste?        | _TBD (Migrering/Ny)_               |
-| Figma skisse                        | _TBD (J/N – legg til Figma lenke)_ |
-| Språk                               | _TBD_                              |
-| API                                 | _TBD_                              |
-| eFormidling                         | _TBD (J/N)_                        |
-| Frontend skal låses før produksjon? | _TBD (J/N)_                        |
+| Egenskap                                  | Verdi                                            |
+| ----------------------------------------- | ------------------------------------------------ |
+| Migrering eller ny tjeneste?              | _TBD (Migrering/Ny)_                             |
+| Figma skisse                              | _TBD (J/N – legg til Figma lenke)_               |
+| Språk                                     | _TBD_                                            |
+| API                                       | _TBD_                                            |
+| eFormidling                               | _TBD (J/N)_                                      |
+| Frontend skal låses før produksjon?       | _TBD (J/N)_                                      |
+| Bruk av events ved mottak av skjemadata   | _RegisterEventsWithEventsComponent (True/False)_ |
 
 ### Lenker
 
