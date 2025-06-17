@@ -15,15 +15,15 @@ type: 'Epic'
 
 <!--  -->
 
-| Egenskap                                  | Verdi                                            |
-| ----------------------------------------- | ------------------------------------------------ |
-| Migrering eller ny tjeneste?              | _TBD (Migrering/Ny)_                             |
-| Figma skisse                              | _TBD (J/N – legg til Figma lenke)_               |
-| Språk                                     | _TBD_                                            |
-| API                                       | _TBD_                                            |
-| eFormidling                               | _TBD (J/N)_                                      |
-| Frontend skal låses før produksjon?       | _TBD (J/N)_                                      |
-| Bruk av events ved mottak av skjemadata   | _RegisterEventsWithEventsComponent (True/False)_ |
+| Egenskap                                | Verdi                                            |
+| --------------------------------------- | ------------------------------------------------ |
+| Migrering eller ny tjeneste?            | _TBD (Migrering/Ny)_                             |
+| Figma skisse                            | _TBD (J/N – legg til Figma lenke)_               |
+| Språk                                   | _TBD_                                            |
+| API                                     | _TBD_                                            |
+| eFormidling                             | _TBD (J/N)_                                      |
+| Frontend skal låses før produksjon?     | _TBD (J/N)_                                      |
+| Bruk av events ved mottak av skjemadata | _RegisterEventsWithEventsComponent (True/False)_ |
 
 ### Lenker
 
@@ -59,14 +59,10 @@ type: 'Epic'
 
 <!-- Legg til rollene og evt. steg de skal ha rettigheter på. -->
 
-| Prosess steg       | Rolle kode | Les | Skriv | Bekreft | Betal | Avslå | Signer |
-| ------------------ | ---------- | --- | ----- | ------- | ----- | ----- | ------ |
-| Task_1 - Utfylling |            |     |       |         |       |       |        |
-|                    |            |     |       |         |       |       |        |
-| Task_2 - Signer 1  |            |     |       |         |       |       |        |
-|                    |            |     |       |         |       |       |        |
-| Task_3 - Signer 2  |            |     |       |         |       |       |        |
-|                    |            |     |       |         |       |       |        |
+| Kode  | Navn         | Kategori     | Les                | Skriv              | Slett          | Start          | Bekreft | Betal | Signer | Avslå | Bekreft mottatt tjenesteeier |
+| ----- | ------------ | ------------ | ------------------ | ------------------ | -------------- | -------------- | ------- | ----- | ------ | ----- | ---------------------------- |
+| DAGL  | Daglig leder | Rolle        | Task_1 - Utfylling | Task_1 - Utfylling | Hele tjenesten | Hele tjenesten |         |       |        |       |                              |
+| [org] | Tjenesteeier | Organisasjon | Hele tjenesten     | Hele tjenesten     |                | Hele tjenesten |         |       |        |       | Hele tjenesten               |
 
 ### Prosess steg
 
