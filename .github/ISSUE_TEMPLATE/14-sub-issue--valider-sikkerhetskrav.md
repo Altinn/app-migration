@@ -7,83 +7,56 @@ assignees: ''
 type: 'Task'
 ---
 
-### Architecture, Design and Threat Modeling
+Følgende sikkerhetskrav er relevante for skjemautvikling og skal verifiseres for hver app vi utvikler. De originale sikkerhetskravene er på [Confluence](https://digdir.atlassian.net/wiki/spaces/BTAM/pages/3039002762/Sikkerhetskrav).
 
-- [ ] V1.1.3: Verify that all user stories and features contain functional security constraints, such as "As a user, I should be able to view and edit my profile. I should not be able to view or edit anyone else's profile"
-- [ ] V1.1.4: Verify that major data flows as well as usage of other components (Altinn products and third party products/services) are documented and justified.
-- [ ] V1.1.5: Verify definition and security analysis of the application's high-level architecture and all connected remote services.
-- [ ] V1.2.2: Verify that communications between application components, including APIs, middleware and data layers, are authenticated. Components should have the least necessary privileges needed.
-- [ ] V1.5.3: Verify that input validation is enforced on a trusted service layer.
-- [ ] V1.6.2: Verify that Azure Key Vault is used to protect key material and other secrets.
-- [ ] V1.11.1: Verify that application components are documented and that the documentation describes the business or security functions they provide.
-- [ ] V1.11.2: Verify that state is not shared across sessions. Consider integrity checks for all high-value transactions to avoid potential race conditions.
+### Sikkerhetstesting
+- [ ] Verifiser at SAST Scan av app er gjennomført, og att oppdaget issues er analysert og utbedret der nødvendig. Alle sikkerhetssårbarheter (Security og Security Hotspots) og andre funn med medium eller høyere alvorlighetsgrad skal vurderes og utbedres om nødvendig. **(V10.2.1, V10.3.2, V5.2.4, V5.3.8, V5.3.6, V5.3.10, V5.5.3)**
+- [ ] Verifiser at SCA test av app er gjennomført og at alle oppdagete sårbarheter er vurdert og utbedret om nødvendig. **(V10.2.1, V10.3.2, V12.3.6)**
+- [ ] Verifiser at SBOM av app for å dokumentere alle avhengigheter er gjennomført. **(V1.1.4, V10.3.2)**
 
-### Authentication
+### Kravspekk, arkitektur og design
+- [ ] Verifiser at sikkerhetsbegrensinger i kravspesifikasjonen er identifisert og fulgt opp med tjenesteeier. Eksempel på sikkerhetsbegrensninger kan være: "Bruker skal ikke få mulighet til å bruke API til å hente opplysninger om andre enn seg selv", eller "bruker har kun mulighet til å redigere disse datamodellfeltene". **(V1.1.3)**
+- [ ] Verifiser at vesentlige dataflyter samt bruk av andre komponenter (Altinn-produkter og tredjepartsprodukter/-tjenester) er dokumentert og begrunnet i README. Dette inkluderer nuget pakker (utenom standard app-pakker), eksterne APIer og andre Altinn tjenester (for eksempel Altinn Melding). **(V1.1.4)**
+- [ ] Verifiser at applikasjonskomponenter, som klasser og metoder, er dokumentert med XML-dokumentasjon koden, og at denne dokumentasjonen beskriver hvilke forretnings- og eller sikkerhetsfunksjoner de utfører. **(V1.11.1)**
+- [ ] Verifiser at applikasjonens eksterne nuget pakker har gjennomgått en sikkerhetsanalyse, kommer fra en pålitelig kilde, er aktivt vedlikeholdt, og er hentet fra https://nuget.org  (sjekk Visual Studio tools>options>Nuget package packet source er kun https://nuget.org). **(V1.1.5, V14.2.4, V10.3.2, V12.3.6)**
+- [ ] Verifiser at applikasjonens eksterne APIer har gjennomgått en sikkerhetsanalyse, kommer fra en pålitelig kilde, er aktivt vedlikeholdt, sikret med TLS (http**S**). Verifiser at sertifikatet ikke har blitt tilbakekalt med `CheckCertificateRevocationList = true`. **(V1.1.5, V1.2.2, V9.2.3, V14.2.4)**
+- [ ] Verifiser at tilstand ikke deles på tvers av instanser. I `Program.cs` blir `services.AddTransient` brukt i stedet for `services.AddSingleton` med mindre det finnes en god begrunnelse for å dele tilstand. Verifiser at data ikke blir hentet i konstruktører, men der den skal brukes. Verifiser at `IHttpContextAccessor.HttpContext` ikke blir brukt i konstruktører ([docs](https://docs.altinn.studio/nb/altinn-studio/v8/reference/analysis/rules/altinnapp0500/)). **(V1.11.2)**
+- [ ] Verifiser at ingen hemmelig informasjon er lagret i koden, at dotnet user-secrets blir brukt lokalt og Azure Key Vault  blir brukt i TT02/Prod. **(V1.6.2, V2.10.4, V6.4.1, V6.4.2)**
 
-- [ ] V2.10.4: Verify that passwords, integrations with databases and third-party systems, seeds and internal secrets, and API keys are stored in Azure Key Vault and not included in the source code or stored within source code repositories.
+### Validering
+- [ ] Verifiser at all validering foregår i backend der det ikke kan påvirkes av sluttbrukeren. Validering skal kjøres som C# kode, dynamiske uttrykk i backend ([kjøre-valideringene-i-backend](https://docs.altinn.studio/nb/altinn-studio/v8/reference/logic/validation/expression-validation/#kj%C3%B8re-valideringene-i-backend)), eller med innebygde metoder i `applicationmetadata.json`. **(V1.5.3)**
+- [ ] Verifisert at all upålitelig input (fra sluttbruker eller eksterne API) er validert med positiv validering. Det vil si at appen kun godtar input som oppfyller alle kravene som er satt, og avviser alt annet, i mottsettning til å spesifisere hva som ikke er lov. For eksempel kun godta små bokstaver i motsetning til å ikke godta tall og store bokstaver (spesialtegn har da blitt lov). **(V5.1.3)**
+- [ ] Verifiser at strukturerte data blir validert mot et forhåndsdefinert regelsett som bestemmer gyldigheten basert på antall tegn, gyldige tegn, mønster og/eller forholdet med andre datafelter. Eksempel på strukturert data er epostadresser, telefonnummer, bankkontonummer og at postnummer og poststed matcher. **(V5.1.4)**
+- [ ] Verifiser at ustrukturerte data (som fritekstfelt) blir validert mot makslengde og eventuelt lovlige tegn. Makslengde på tekst kan settes i `datamodel.cs` med `[MaxLength(int lengde)]` satt for strengen. **(V5.2.2)**
 
-### Access Control
+### Sanitering og enkoding
+- [ ] Om appen sender epost, verifiser at det blir sendt ved hjelp av `IEmailNotificationClient` i app-lib-dotnet **(V5.2.3)**
+- [ ] Verifiser at appen ikke kjører dynamisk kode (kode som blir bygget i runtime). Eksempler på dette er `System.Reflection.Emit.AssemblyBuilder` og `Type.InvokeMember`. **(V5.2.4, V12.3.6)**
+- [ ] Verifiser at appen ikke gjør kall direkte mot operativsystemet eller starter kommandolinjeverktøy, eks med Process.Start. Om absolutt nødvendig, verifiser at upålitelig brukerinput aldri blir brukt direkte, men blir enkodet forsvarlig. **(V5.3.8)**
+- [ ] Verifiser at upålitelig data ikke blir direkte brukt i URL eller andre http parametere. Om strengt nødvendig, verifiser format på brukerinput før http-kallet blir sendt. **(V5.2.6)**
+- [ ] Verifiser at deserialisering av upålitelig data (eks eksterne API) er minimert med DTO-objekter som kun henter data appen behøver, og er gjennomført med trygge deserialiserings-biblioteker (json: `System.Text.Json`, xml: `System.Xml.XmlReader` med `DtdProcessing.Prohibit` og `XmlResolver = null`) **(V5.3.6, V5.3.10, V5.5.3, V8.1.3)**
 
-- [ ] V4.1.3: Verify that the principle of least privilege exists - users should only be able to access functions, data files, URLs, controllers, services, and other resources, for which they possess specific authorization. This implies protection against spoofing and elevation of privilege.
-- [ ] V4.3.3: Verify the application has additional authorization (such as step up or adaptive authentication) for lower value systems, and / or segregation of duties for high value applications to enforce anti-fraud controls as per the risk of application and past fraud.
+### Tilgangskontroll
+- [ ] Verifiser at prinsippet om minste privilegium er ivaretatt. Policy filen gjøres så restriktiv som mulig. Ingen har en tilgangstype (eks read/write) i en task de ikke trenger. **(V4.1.3)**
+- [ ] Verifiser at appen krever ekstra autorisasjon for å utføre handlinger med ulike autorisasjonsnivå. For eksempel at brukeren har nødvendige rettigheter definert av `actionRequiredToRead` og `actionRequiredToWrite` for å lese eller skrive til sensitive datatyper ([Beskyttede data](https://docs.altinn.studio/nb/altinn-studio/v8/concepts/data-model/restricted-data/#hva-er-beskyttede-data)). Dersom applikasjonen tilbyr funksjonalitet basert på ulike sikkerhetsnivå (0–4), skal riktig nivå håndheves. Tilganger som kreves for å benytte eksponerte, [egendefinerte API-er](https://docs.altinn.studio/nb/altinn-studio/v8/reference/api/expose/) skal være tydelig definert og verifisert. **(V4.3.3)**
 
-### Validation, Sanitization and Encoding
+### Feilhåndtering og logging
+- [ ] Verifiser at appen ikke logger betalingsinformasjon, innloggingsinformasjon, eller sensitiv data i henhold til Personopplysningsloven og Digdirs retningslinjer. Logging av personlig identifiserbar informasjon skal begrenses så langt det lar seg gjøre. **(V7.1.1, V7.1.2)**
+- [ ] Verifiser at `ILogger` blir brukt for å logge data med beskrivende tekst-input. Nødvendig metadata for etterforskning blir da tilgjengeliggjort i Application Insight. **(V7.1.4)**
+- [ ] Verifiser at upålitelig brukerinput ikke blir inkludert i loggene for å unngå log injections. Om brukerinput må være med skal det saneres/enkodes forsvarlig. **(V7.3.1)**
+- [ ] Verifiser at feilhåndtering blir brukt (`try` `catch`) der appen er forventet å kunne feile. Feil logges med stacktrace (`ILogger.LogError(ex, "…")`) **(V7.4.2)**
 
-- [ ] V5.1.3: Verify that all input (HTML form fields, REST requests, URL parameters, HTTP headers, cookies, batch files, RSS feeds, etc) is validated using positive validation (allow lists).
-- [ ] V5.1.4: Verify that structured data is strongly typed and validated against a defined schema including allowed characters, length and pattern (e.g. credit card numbers, e-mail addresses, telephone numbers, or validating that two related fields are reasonable, such as checking that suburb and zip/postcode match).
-- [ ] V5.2.2: Verify that unstructured data is sanitized to enforce safety measures such as allowed characters and length.
-- [ ] V5.2.3: Verify that the application sanitizes user input before passing to mail systems to protect against SMTP or IMAP injection.
-- [ ] V5.2.4: Verify that the application avoids the use of eval() or other dynamic code execution features. Where there is no alternative, any user input being included must be sanitized or sandboxed before being executed.
-- [ ] V5.2.6: Verify that the application protects against SSRF attacks, by validating or sanitizing untrusted data or HTTP file metadata, such as filenames and URL input fields, and uses allow lists of protocols, domains, paths and ports.
-- [ ] V5.3.6: Verify that the application protects against JSON injection attacks, JSON eval attacks, and JavaScript expression evaluation.
-- [ ] V5.3.8: Verify that the application protects against OS command injection and that operating system calls use parameterized OS queries or use contextual command line output encoding.
-- [ ] V5.3.10: Verify that the application protects against XPath injection or XML injection attacks.
-- [ ] V5.5.3: Verify that deserialization of untrusted data is avoided or is protected in both custom code and third-party libraries (such as JSON, XML and YAML parsers).
+### Beskyttelse av data og ondsinnet kode
+- [ ] Verifiser at applikasjonen minimerer antall parametere i en forespørsel. Send kun et minimum av data til eksterne API-er for å hente nødvendig informasjon. **(V8.1.3)**
+- [ ] Verifiser at appen ikke sender data til uautoriserte tredjeparter. **(V10.2.1)**
 
-### Stored Cryptography
+### Forretningslogikk
+- [ ] Verifiser at applikasjonen kun behandler forretningslogikkflyt for samme instans i sekvensiell rekkefølge, uten å hoppe over steg. Ha en Task for hvert forretnigslogikk-steg og verifiser at det ikke er mulig for sluttbrukeren og endre [flytkontrollen](https://docs.altinn.studio/nb/altinn-studio/v8/reference/process/flowcontrol/) ved å manipulere data. **(V11.1.1)**
+- [ ] Verifiser at appen beskytter mot alle identifiserte forretningsrisikoer. Eksempler på forretningsrisikoer kan være tap av inntekter ved at brukeren manipulerer beløp før betaling, operasjonelle forstyrrelser for eksempel ved at appen sender data som ikke kan bli behandlet av mottaket, eller omdømmeskade. **(V11.1.5)**
 
-- [ ] V6.4.1: Verify that Azure Key Vault is used to securely create, store, control access to and destroy secrets.
-- [ ] V6.4.2: Verify that key material is not exposed to the application but instead uses an isolated security module like a vault for cryptographic operations.
-
-### Error Handling and Logging
-
-- [ ] V7.1.1: Verify that the application does not log credentials or payment details. Session tokens should only be stored in logs in an irreversible, hashed form.
-- [ ] V7.1.2: Verify that the application does not log other sensitive data as defined in Personopplysningsloven and Digdir's policies. In general, logging of personal identifiable information (PII) to technical logs should be avoided if possible.
-- [ ] V7.1.4: Verify that each log event includes necessary information that would allow for a detailed investigation of the timeline when an event happens.
-- [ ] V7.3.1: Verify that all logging components appropriately encode data to prevent log injection.
-- [ ] V7.4.2: Verify that exception handling (or a functional equivalent) is used across the codebase to account for expected and unexpected error conditions.
-
-### Data Protection
-
-- [ ] V8.1.3: Verify the application minimizes the number of parameters in a request, such as hidden fields, Ajax variables, cookies and header values.
-
-### Communication
-
-- [ ] V9.2.3: Verify that all connections to external systems are authenticated - e.g. by verfifying the external system's TLS certificate (including signature chain and revocation status).
-
-### Malicious Code
-
-- [ ] V10.2.1: Verify that the application source code and third party libraries do not contain unauthorized phone home or data collection capabilities.
-- [ ] V10.3.2: Verify that the application employs integrity protections, such as code signing or subresource integrity. The application must not load or execute code from untrusted sources, such as loading includes, modules, plugins, code, or libraries from untrusted sources or the Internet.
-
-### Business Logic
-
-- [ ] V11.1.1: Verify that the application will only process business logic flows for the same user in sequential step order and without skipping steps.
-- [ ] V11.1.5: Verify the application has business logic limits or validation to protect against likely business risks or threats, identified in the epic's risk assessment or threat modeling activities. Verify that all Github issues representing mitigating actions are closed.
-
-### Files and Resources
-
-- [ ] V12.1.1: Verify that the application will not accept large files that could fill up storage or cause a denial of service.
-- [ ] V12.1.2: Verify that the application checks compressed files (e.g. zip, gz, docx, odt) against maximum allowed uncompressed size and against maximum number of files before uncompressing the file.
-- [ ] V12.2.1: Verify that files obtained from untrusted sources are validated to be of expected type based on the file's content.
-- [ ] V12.3.1: Verify that user-submitted filename metadata is not used directly by system or framework filesystems and that a URL API is used to protect against path traversal.
-- [ ] V12.3.2: Verify that user-submitted filename metadata is validated or ignored to prevent the disclosure, creation, updating or removal of local files (LFI).
-- [ ] V12.3.3: Verify that user-submitted filename metadata is validated or ignored to prevent the disclosure or execution of remote files via Remote File Inclusion (RFI) or Server-side Request Forgery (SSRF) attacks.
-- [ ] V12.3.4: Verify that the application protects against Reflective File Download (RFD) by validating or ignoring user-submitted filenames in a JSON, JSONP, or URL parameter, the response Content-Type header should be set to text/plain, and the Content-Disposition header should have a fixed filename.
-- [ ] V12.3.5: Verify that untrusted file metadata is not used directly with system API or libraries, to protect against OS command injection.
-- [ ] V12.3.6: Verify that the application does not include and execute functionality from untrusted sources, such as unverified content distribution networks, JavaScript libraries, node npm libraries, or server-side DLLs.
-- [ ] V12.4.2: Verify that files obtained from untrusted sources are scanned by antivirus scanners to prevent upload and serving of known malicious content.
-
-### Configuration
-
-- [ ] V14.2.4: Verify that third party components come from pre-defined, trusted and continually maintained repositories.
+### Filer og ressurser
+- [ ] Verifiser at appen ikke aksepterer store/mange filer så storrage blir fyllt opp ved å definere `"maxCount"` og `"maxSize"` for brukerkontrolerte datatyper i `applicationmetadata.json`. **(V12.1.1)**
+- [ ] Verifiser at appen ikke dekomprimerer komprimerte filer lastet opp av brukeren (eks  `.zip`, `.gz`, `.docx`, `.odt`). Om absolutt nødvendig sjekk først at dekomprimert filstørrelse ikke overskriver maks filstørrelse. **(V12.1.2)**
+- [ ] Verifiser at filer som er hentet fra upålitelige kilder (sluttbruker) valideres til å være av forventet type basert på filens innhold. Verifiser at `FileUpload`-komponenter har satt forventet filtyper i `“validFileEndings“` og `“hasCustomFileEndings” = true`. I `applicationmetadata`, verifiser at datatypen har tilsvarende MIME-typer er satt i `“allowedContentTypes"`, og at [MIME-type validering](https://docs.altinn.studio/nb/altinn-studio/v8/reference/logic/validation/files/#hvordan-konfigurere-og-aktivere-standard-mime-type-validering-i-applikasjonen-din) er aktivert. **(V12.2.1)**
+- [ ] Verifiser at filens innhold eller metadata som er kontrollert av brukeren ikke blir direkte brukt i applikasjonskoden uten å bli enkodet på en trygg måte. For eksempel sjekk at filnavn (`dataElement.filename`) kun består av bokstaver og tall før den blir brukt i app-koden. **(V12.3.1, V12.3.2, V12.3.3, V12.3.4, V12.3.5, V12.3.6)**
+- [ ] Verifiser at filer fra upålitelige kilder øyeblikkelig blir scannet med antivirus før appen blir sendt inn. Dette gjøres med å ha satt `“enableFileScan": true` og `"validationErrorOnPendingFileScan": true` for datatypen i `applicationmetadata`. **(V12.4.2)**
