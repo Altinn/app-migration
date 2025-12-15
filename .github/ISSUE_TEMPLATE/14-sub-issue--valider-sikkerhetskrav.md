@@ -21,16 +21,21 @@ Følgende sikkerhetskrav er relevante for skjemautvikling og skal verifiseres fo
 - [ ] Verifiser at vesentlige dataflyter samt bruk av andre komponenter (Altinn-produkter og tredjepartsprodukter/-tjenester) er dokumentert og begrunnet i README. Dette inkluderer nuget pakker (utenom standard app-pakker), eksterne APIer og andre Altinn tjenester (for eksempel Altinn Melding). **(V1.1.4)**
 - [ ] Verifiser at applikasjonskomponenter, som klasser og metoder, er dokumentert med XML-dokumentasjon kode, og at denne dokumentasjonen beskriver hvilke forretnings- og eller sikkerhetsfunksjoner de utfører. **(V1.11.1)**
 - [ ] Verifiser at applikasjonens eksterne nuget pakker har gjennomgått en sikkerhetsanalyse, kommer fra en pålitelig kilde, er aktivt vedlikeholdt, og er hentet fra https://nuget.org (sjekk i Visual Studio tools>options>Nuget package at packet source kun er https://nuget.org). **(V1.1.5, V14.2.4, V10.3.2, V12.3.6)**
-- [ ] Verifiser at applikasjonens eksterne APIer har gjennomgått en sikkerhetsanalyse, kommer fra en pålitelig kilde, er aktivt vedlikeholdt, sikret med TLS (http**S**). Verifiser at sertifikatet ikke har blitt tilbakekalt med `CheckCertificateRevocationList = true`. **(V1.1.5, V1.2.2, V9.2.3, V14.2.4)**
+- [ ] Verifiser at applikasjonens eksterne APIer har gjennomgått en sikkerhetsanalyse, kommer fra en pålitelig kilde, er aktivt vedlikeholdt, sikret med TLS (http**S**). Verifiser at sertifikatet ikke har blitt tilbakekalt med `CheckCertificateRevocationList = true` som under. **(V1.1.5, V1.2.2, V9.2.3, V14.2.4)**
+```
+HttpClientHandler httpClientHandler  = new HttpClientHandler() { CheckCertificateRevocationList = true };
+HttpClient httpClient = new HttpClient(handler)
+``` 
+
 - [ ] Verifiser at tilstand ikke deles på tvers av instanser. I `Program.cs` blir `services.AddTransient` brukt i stedet for `services.AddSingleton` med mindre det finnes en god begrunnelse for å dele tilstand. Verifiser at data ikke blir hentet i konstruktører, men der den skal brukes. Verifiser at `IHttpContextAccessor.HttpContext` ikke blir brukt i konstruktører ([docs](https://docs.altinn.studio/nb/altinn-studio/v8/reference/analysis/rules/altinnapp0500/)). **(V1.11.2)**
 - [ ] Verifiser at ingen hemmelig informasjon er lagret i koden, at dotnet user-secrets blir brukt lokalt og Azure Key Vault blir brukt i TT02/Prod. **(V1.6.2, V2.10.4, V6.4.1, V6.4.2)**
 
 ### Validering
 
-- [ ] Verifiser at all validering foregår i backend der det ikke kan påvirkes av sluttbrukeren. Validering skal kjøres som C# kode, dynamiske uttrykk i backend ([kjøre-valideringene-i-backend](https://docs.altinn.studio/nb/altinn-studio/v8/reference/logic/validation/expression-validation/#kj%C3%B8re-valideringene-i-backend)), eller med innebygde metoder i `applicationmetadata.json`. **(V1.5.3)**
+- [ ] Verifiser at all validering foregår i backend der det ikke kan påvirkes av sluttbrukeren. Validering skal kjøres som C# kode eller som dynamiske uttrykk i backend ([kjøre-valideringene-i-backend](https://docs.altinn.studio/nb/altinn-studio/v8/reference/logic/validation/expression-validation/#kj%C3%B8re-valideringene-i-backend)). **(V1.5.3)**
 - [ ] Verifisert at all upålitelig input (fra sluttbruker eller eksterne API) er validert med positiv validering. Det vil si at appen kun godtar input som oppfyller alle kravene som er satt, og avviser alt annet, i motsetning til å spesifisere hva som ikke er lov. For eksempel kun godta små bokstaver i motsetning til å ikke godta tall og store bokstaver (spesialtegn har da blitt lov). **(V5.1.3)**
 - [ ] Verifiser at strukturerte data blir validert mot et forhåndsdefinert regelsett som bestemmer gyldigheten basert på antall tegn, gyldige tegn, mønster og/eller forholdet med andre datafelter. Eksempel på strukturert data er e-postadresser, telefonnummer, bankkontonummer og at postnummer og poststed matcher. **(V5.1.4)**
-- [ ] Verifiser at ustrukturerte data (som fritekstfelt) blir validert mot makslengde og eventuelt lovlige tegn. Makslengde på tekst kan settes i `datamodel.cs` med `[MaxLength(int lengde)]` satt for strengen. **(V5.2.2)**
+- [ ] Verifiser at ustrukturerte data (som fritekstfelt) blir validert mot makslengde og eventuelt lovlige tegn. Makslengde på tekst kan settes i `datamodel.cs` med `[MaxLength(int lengde)]` satt for strengen. Dette blir satt automatisk datamodell verktøyet i Studio gjennom "Største mulige lengde"-feltet.  **(V5.2.2)**
 
 ### Sanitering og enkoding
 
@@ -38,7 +43,7 @@ Følgende sikkerhetskrav er relevante for skjemautvikling og skal verifiseres fo
 - [ ] Verifiser at appen ikke kjører dynamisk kode (kode som blir bygget i runtime). Eksempler på dette er `System.Reflection.Emit.AssemblyBuilder` og `Type.InvokeMember`. **(V5.2.4, V12.3.6)**
 - [ ] Verifiser at appen ikke gjør kall direkte mot operativsystemet eller starter kommandolinjeverktøy, eks med Process.Start. Om absolutt nødvendig, verifiser at upålitelig brukerinput aldri blir brukt direkte, men blir enkodet forsvarlig. **(V5.3.8)**
 - [ ] Verifiser at upålitelig data ikke blir direkte brukt i URL eller andre http parametere. Om strengt nødvendig, verifiser format på brukerinput før http-kallet blir sendt. **(V5.2.6)**
-- [ ] Verifiser at deserialisering av upålitelig data (eks eksterne API) er minimert med DTO-objekter som kun henter data appen behøver, og er gjennomført med trygge deserialiserings-biblioteker (json: `System.Text.Json`, xml: `System.Xml.XmlReader` med `DtdProcessing.Prohibit` og `XmlResolver = null`) **(V5.3.6, V5.3.10, V5.5.3, V8.1.3)**
+- [ ] Verifiser at deserialisering av upålitelig data (eks eksterne API) er minimert med DTO-objekter som kun henter data appen behøver, og er gjennomført med trygge deserialiserings-biblioteker (json: `System.Text.Json`, xml: `System.Xml.XmlReader` med `DtdProcessing.Prohibit` og `XmlResolver = null`) **(V5.3.6, V5.3.10, V5.5.3)**
 
 ### Tilgangskontroll
 
@@ -65,7 +70,9 @@ Følgende sikkerhetskrav er relevante for skjemautvikling og skal verifiseres fo
 ### Filer og ressurser
 
 - [ ] Verifiser at appen ikke aksepterer store/mange filer så storrage blir fyllt opp, ved å definere `"maxCount"` og `"maxSize"` for brukerkontrollerte datatyper i `applicationmetadata.json`. **(V12.1.1)**
-- [ ] Verifiser at appen ikke dekomprimerer komprimerte filer lastet opp av brukeren (eks `.zip`, `.gz`, `.docx`, `.odt`). Om absolutt nødvendig sjekk først at dekomprimert filstørrelse ikke overskriver maks filstørrelse. **(V12.1.2)**
-- [ ] Verifiser at filer som er hentet fra upålitelige kilder (sluttbruker) valideres til å være av forventet type basert på filens innhold. Verifiser at `FileUpload`-komponenter har satt forventet filtyper i `“validFileEndings“` og `“hasCustomFileEndings” = true`. I `applicationmetadata`, verifiser at datatypen har tilsvarende MIME-typer er satt i `“allowedContentTypes"`, og at [MIME-type validering](https://docs.altinn.studio/nb/altinn-studio/v8/reference/logic/validation/files/#hvordan-konfigurere-og-aktivere-standard-mime-type-validering-i-applikasjonen-din) er aktivert. **(V12.2.1)**
+- [ ] Verifiser at appen ikke dekomprimerer komprimerte filer lastet opp av brukeren (eks `.zip`, `.gz`, `.docx`, `.odt`). Om absolutt nødvendig sjekk først at dekomprimert filstørrelse ikke overskriver maks filstørrelse eller maks antall filer. **(V12.1.2)**
+- [ ] Verifiser at filer fra upålitelige kilder (sluttbruker) valideres for å sikre at de er av forventet type basert på filens faktiske innhold. Dette innebærer følgende:
+  - Kontroller at `FileUpload`-komponenter har spesifisert forventede filtyper i `"validFileEndings"` og at `"hasCustomFileEndings"` er satt til `true`.
+  - I `applicationmetadata`, bekreft at datatypen har tilsvarende MIME-typer definert i `"allowedContentTypes"` og at [MIME-type validering](https://docs.altinn.studio/nb/altinn-studio/v8/reference/logic/validation/files/#hvordan-konfigurere-og-aktivere-standard-mime-type-validering-i-applikasjonen-din) er aktivert. **(V12.2.1)**
 - [ ] Verifiser at filens innhold eller metadata som er kontrollert av brukeren ikke blir direkte brukt i applikasjonskoden uten å bli enkodet på en trygg måte. For eksempel sjekk at filnavn (`dataElement.filename`) kun består av bokstaver og tall før den blir brukt i app-koden. **(V12.3.1, V12.3.2, V12.3.3, V12.3.4, V12.3.5, V12.3.6)**
 - [ ] Verifiser at filer fra upålitelige kilder øyeblikkelig blir scannet med antivirus før appen blir sendt inn. Dette gjøres med å ha satt `“enableFileScan": true` og `"validationErrorOnPendingFileScan": true` for datatypen i `applicationmetadata`. **(V12.4.2)**
