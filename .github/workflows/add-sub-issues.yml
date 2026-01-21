@@ -5,7 +5,7 @@ on:
 
 jobs:
   create-sub-issue:
-    if: contains(github.event.issue.labels.*.name, 'kind/app')
+    if: contains(github.event.issue.labels.*.name, 'kind/app') && github.event.issue.type.name == 'Epic'
     runs-on: ubuntu-latest
     permissions:
       contents: read
